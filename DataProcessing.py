@@ -2,7 +2,7 @@ import json
 
 class DataProcessing(object):
 
-    GEOJSON_LINE_SCHEMA_PATH = "geoJsonSchema/pathSchema.json"
+    GEOJSON_LINE_SCHEMA_PATH = "geoJsonSchemas/pathSchema.json"
 
     """docstring for DataProcessing."""
 
@@ -11,10 +11,10 @@ class DataProcessing(object):
         self.path = path
 
     def getGeoJsonOf(self, tripData):
-        lineSchemaGeoJson = loadJson(GEOJSON_LINE_SCHEMA_PATH)
+        lineSchemaGeoJson = self.loadJson(self.GEOJSON_LINE_SCHEMA_PATH)
         listToAppend = []
         for positionMeta in tripData["coords"]:
-            listToAppend.append([positionMeta["lat"], positionMeta["lng"]])
+            listToAppend.append([positionMeta["lng"], positionMeta["lat"]])
         lineSchemaGeoJson["features"][0]["geometry"]["coordinates"] = listToAppend
         return lineSchemaGeoJson
 
@@ -28,7 +28,7 @@ class DataProcessing(object):
 
 
     def loadJson(self, fullPath):
-        with open(path) as f:
+        with open(fullPath) as f:
             data = json.loads(f.read())
             return data
         return None
