@@ -1,0 +1,125 @@
+{
+  "axes": [
+    {
+      "orient":"bottom",
+      "scale": "x",
+      "title": "Time",
+      "type": "x",
+      "tickCount": 10
+    },
+    {
+      "orient":"left",
+      "scale": "y",
+      "title": "Speed",
+      "type": "y"
+    }
+  ],
+  "signals": [
+  {
+    "name": "interpolate",
+    "value": "monotone",
+    "bind": {
+      "input": "select",
+      "options": [
+        "basis",
+        "cardinal",
+        "catmull-rom",
+        "linear",
+        "monotone",
+        "natural",
+        "step",
+        "step-after",
+        "step-before"
+      ]
+    }
+  }
+],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        {
+          "col": "Speed",
+          "time": 0,
+          "speed": 0
+        }
+      ]
+    }
+  ],
+  "height": 300,
+  "legends": [],
+  "marks": [
+    {
+      "from": {
+        "data": "table",
+        "transform": [
+          {
+            "keys": ["data.col"],
+            "type": "facet"
+          }
+        ]
+      },
+      "marks": [
+        {
+          "properties": {
+            "enter": {
+              "stroke": {
+                "field": "data.col",
+                "scale": "color"
+              },
+              "strokeWidth": {
+                "value": 2
+              },
+              "x": {
+                "field": "data.time",
+                "scale": "x"
+              },
+              "y": {
+                "field": "data.speed",
+                "scale": "y"
+              }
+            }
+          },
+          "type": "line"
+        }
+      ],
+      "type": "group"
+    }
+  ],
+  "padding": "5",
+  "scales": [
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.time"
+      },
+      "nice": true,
+      "zero":false,
+      "name": "x",
+      "range": "width",
+      "type": "linear"
+    },
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.speed"
+      },
+      "name": "y",
+      "type": "linear",
+      "nice": true,
+      "zero":false,
+      "range": "height"
+    },
+    {
+      "domain": {
+        "data": "table",
+        "field": "data.col"
+      },
+      "name": "color",
+      "range": "category20",
+      "type": "ordinal"
+    }
+  ],
+  "width": 700
+
+}
